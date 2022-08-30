@@ -39,7 +39,9 @@ header h1 {
 .search-for-a-city label, .search-for-a-city input {
     flex-basis: 1;
 }
-
+#api-warning {
+    color: red;
+}
 
 
 /* Search for a City End */
