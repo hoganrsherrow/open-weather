@@ -30,3 +30,25 @@ header h1 {
     display: inline-block;
 }
 /* Header End */
+
+/* Search for a City Styling */
+.search-for-a-city {
+    flex-grow: 1;
+    
+}
+.search-for-a-city label, .search-for-a-city input {
+    flex-basis: 1;
+}
+
+
+
+/* Search for a City End */
+
+/* Forecast Styling */
+.forecast-container{
+    flex-basis: 3;
+}
+
+
+
+/* Forecast End */
