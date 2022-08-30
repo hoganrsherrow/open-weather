@@ -16,6 +16,9 @@ body {
 h1 {
     font-size: 36px;
 }
+main {
+    margin: 20px 15px;
+}
 /* Header Style */
 
 header {
@@ -33,11 +36,10 @@ header h1 {
 
 /* Search for a City Styling */
 .search-for-a-city {
-    flex-grow: 1;
-    
+    flex-basis: 33%;
 }
 .search-for-a-city label, .search-for-a-city input {
-    flex-basis: 1;
+    flex-basis: 100%;
 }
 #api-warning {
     color: red;
@@ -48,9 +50,18 @@ header h1 {
 
 /* Forecast Styling */
 .forecast-container{
-    flex-basis: 3;
+    flex-basis: 67%;
 }
 
+#today-forecast {
+    margin-left: 15px;
+    padding: 0px 0px 15px 30px;
+    border: 2px solid var(--primary-color);
+    background-color: var(--tertiary-color);
+}
+#today-forecast h2, #today-forecast div {
+    flex-basis: 100%;
+}
 
 
 /* Forecast End */
