@@ -1,9 +1,11 @@
 // Array to hold city names if one does not already exist in localStorage
 if (localStorage.cityNames) {
     var cityNames = JSON.parse(localStorage.getItem("cityNames"));
+    console.log(localStoragecityNames);
 } else {
     var cityNames = [];
 };
+console.log(cityNames);
 // API key from account with Open Weather
 var apiKey = "bb7c4152bdea4e092599aeb298e2c4ef";
 // API fetch to obtain current weather conditions from Open Weather
@@ -29,6 +31,7 @@ function createCurrentForecastEl(name, temp, feelsLike, wind, humidity) {
     $(".forecast-container").append(`<div class="d-flex flex-wrap" id="today-forecast"></div>`);
 
     $("#today-forecast").append(`<h2>${name}</h2><div>Temp: ${temp}\u2109</div><div>Feels Like: ${feelsLike}\u2109</div><div>Wind: ${wind} MPH</div><div>Humidity: ${humidity} %</div>`);
+    updateSearchHistory();
 };
 
 // Generate Search for a City section
@@ -37,7 +40,7 @@ function createSearchForACityEl() {
 
     createCitySearchInputEl();
     createSearchBtnEl();
-    //updateSearchHistory();
+    updateSearchHistory();
 };
 
 // Generate city search input
@@ -87,29 +90,29 @@ function fetchGeocode(city) {
 //     });
 
 // Save to localStorage
-// function saveToLocalStorage(names) {
-//     localStorage.setItem("cityNames", JSON.stringify(names));
-//     console.log(localStorage.getItem("cityNames"));
-// };
+function saveToLocalStorage(names) {
+    localStorage.setItem("cityNames", JSON.stringify(names));
+    console.log(localStorage.getItem("cityNames"));
+};
 
-// // Update Search History
-// function updateSearchHistory() {
-//     if (cityNames.length > 0) {
-//         $(".search-for-a-city").append(`<div class="content-separator"></div>`);
-//         for (let i = 0; i < cityNames.length; i++) {
-//             $(".search-for-a-city").append(`<button type="button" class="btn btn-secondary city-btn" id="${cityNames[i]}">${cityNames[i]}</button>`);
-//         }
-//         console.log($(".city-btn").length);
-//         console.log($(".city-btn")[0].id);
-//     }
-// };
+// Update Search History
+function updateSearchHistory() {
+    if (cityNames.length > 0) {
+        $(".search-for-a-city").append(`<div class="content-separator"></div>`);
+        for (let i = 0; i < cityNames.length; i++) {
+            $(".search-for-a-city").append(`<button type="button" class="btn btn-secondary city-btn" id="${cityNames[i]}">${cityNames[i]}</button>`);
+        }
+        console.log($(".city-btn").length);
+        console.log($(".city-btn")[0].id);
+    }
+};
 
 $(document).ready(() => {
     console.log("The document is ready!");
     createSearchForACityEl();
     createForecastEl();
    // callCurrentForecast();
-    $("button")[0].click( () => {
+    $("button").click( () => {
         console.log("click me");
         if ($("input")[0].value == "") {
             $(".search-for-a-city").prepend(`<div id="api-warning">Please enter a valid city name.</div>`);
