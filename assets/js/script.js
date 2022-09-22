@@ -1,7 +1,7 @@
 // Array to hold city names if one does not already exist in localStorage
 if (localStorage.cityNames) {
     var cityNames = JSON.parse(localStorage.getItem("cityNames"));
-    console.log(localStoragecityNames);
+    console.log(localStorage.cityNames);
 } else {
     var cityNames = [];
 };
@@ -28,10 +28,11 @@ function callCurrentForecast(lat, lon) {
 
 // Generate current forecast element
 function createCurrentForecastEl(name, temp, feelsLike, wind, humidity) {
+    $(".forecast-container").html = "";
     $(".forecast-container").append(`<div class="d-flex flex-wrap" id="today-forecast"></div>`);
 
     $("#today-forecast").append(`<h2>${name}</h2><div>Temp: ${temp}\u2109</div><div>Feels Like: ${feelsLike}\u2109</div><div>Wind: ${wind} MPH</div><div>Humidity: ${humidity} %</div>`);
-    updateSearchHistory();
+    //updateSearchHistory();
 };
 
 // Generate Search for a City section
@@ -40,7 +41,7 @@ function createSearchForACityEl() {
 
     createCitySearchInputEl();
     createSearchBtnEl();
-    updateSearchHistory();
+    //updateSearchHistory();
 };
 
 // Generate city search input
@@ -95,12 +96,18 @@ function saveToLocalStorage(names) {
     console.log(localStorage.getItem("cityNames"));
 };
 
+// Handle search history event
+function handleSearchEvent(obj) {
+    console.log(obj.id);
+    fetchGeocode(obj.id);
+}
+
 // Update Search History
 function updateSearchHistory() {
     if (cityNames.length > 0) {
         $(".search-for-a-city").append(`<div class="content-separator"></div>`);
         for (let i = 0; i < cityNames.length; i++) {
-            $(".search-for-a-city").append(`<button type="button" class="btn btn-secondary city-btn" id="${cityNames[i]}">${cityNames[i]}</button>`);
+            $(".search-for-a-city").append(`<button type="button" class="btn btn-secondary city-btn" onClick="handleSearchEvent(this)" id="${cityNames[i]}">${cityNames[i]}</button>`);
         }
         console.log($(".city-btn").length);
         console.log($(".city-btn")[0].id);
@@ -111,19 +118,21 @@ $(document).ready(() => {
     console.log("The document is ready!");
     createSearchForACityEl();
     createForecastEl();
+    updateSearchHistory();
    // callCurrentForecast();
-    $("button").click( () => {
+   console.log($("button")[0]);
+    $(".btn-primary").click( () => {
         console.log("click me");
         if ($("input")[0].value == "") {
             $(".search-for-a-city").prepend(`<div id="api-warning">Please enter a valid city name.</div>`);
         } else {
             fetchGeocode($("input")[0].value);
             // push() name to cityNames array
-            // cityNames.push($("input")[0].value);
-            // console.log(cityNames);
-            // saveToLocalStorage(cityNames);
+            cityNames.push($("input")[0].value);
+            console.log(cityNames);
+            saveToLocalStorage(cityNames);
             $("input")[0].value = "";
-            //updateSearchHistory();
+            updateSearchHistory();
         }
     });
 });
