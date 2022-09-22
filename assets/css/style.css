@@ -35,6 +35,15 @@ header h1 {
 /* Header End */
 
 /* Search for a City Styling */
+.city-btn {
+    flex-basis: 100%;
+}
+.content-separator {
+    flex-basis: 100%;
+    height: 9px;
+    background-color: var(--secondary-color);
+    border-radius: 15px;
+}
 .search-for-a-city {
     flex-basis: 33%;
 }
