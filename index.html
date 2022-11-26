@@ -16,7 +16,14 @@
     <header class="d-flex justify-content-center align-items-center">
         <h1>Hogan's Weather Dashboard</h1>
     </header>
-    <main class="d-flex justify-content-around"></main>
+    <main class="d-flex justify-content-around">
+        <section class="search-for-a-city" id="search-container">
+            <label for="city">Search for a City:</label>
+            <input name="city" id="city" type="text" />
+            <button class="btn btn-outline-primary city-btn" type="button">Search</button>
+        </section>
+        <section class="forecast-conainer" id="forecast-container"></section>
+    </main>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="./assets/js/script.js"></script>
 </body>
