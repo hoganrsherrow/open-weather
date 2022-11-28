@@ -10,8 +10,16 @@ console.log(cityNames);
 const apiKey = "bb7c4152bdea4e092599aeb298e2c4ef";
 
 // Create city search btn
-const createCitySearchEl = () => {
-    
+const createCurrentForecastEl = (name, temp, feelsLike, windSpeed, humidity) => {
+    $("#forecast-container").append(`
+    <div class="card-body">
+        <h5 class="card-title">${name}</h5>
+        <div>Temperature: ${temp} &degF</div>
+        <div>Feels Like: ${feelsLike} &degF</div>
+        <div>Wind Speed: ${windSpeed} MPH</div>
+        <div>Humidity: ${humidity}%</div>
+    </div>
+    `);
 }
 
 // API fetch to obtain current weather conditions from Open Weather
@@ -23,7 +31,7 @@ const callCurrentForecast = (lat, lon) => {
                     console.log(data);
                     console.log(data.main);
                     console.log(data.name);
-                    //createCurrentForecastEl(data.name, data.main.temp, data.main.feels_like, data.wind.speed, data.main.humidity);
+                    createCurrentForecastEl(data.name, data.main.temp, data.main.feels_like, data.wind.speed, data.main.humidity);
 
                 });
             } else {
@@ -51,12 +59,14 @@ const fetchGeocode = (city) => {
 };
 
 
-
+$("#city-btn").click(() => {
+    console.log($("#city").val());
+    fetchGeocode($("#city").val())
+});
 
 
 $(document).ready(() => {
     console.log("The document is ready!");
-   
 });
 
 

@@ -9,6 +9,7 @@
 * {
     box-sizing: border-box;
     margin: 0;
+    text-align: center;
 }
 body {
     background-color: azure;
@@ -45,11 +46,15 @@ header h1 {
     border-radius: 15px;
 }
 .search-for-a-city {
-    flex-basis: 33%;
+    margin-right: 15px;
 }
-.search-for-a-city label, .search-for-a-city input {
-    flex-basis: 100%;
+
+.search-for-a-city > * {
+    display: block;
+    height: fit-content !important;
+    width: 100%;
 }
+
 #api-warning {
     color: red;
 }
@@ -59,16 +64,16 @@ header h1 {
 
 /* Forecast Styling */
 .forecast-container{
-    background-color: var(--tertiary-color);
-    border: 3px solid white;
-    flex-basis: 67%;
+    /* background-color: var(--tertiary-color);
+    border: 3px solid white; */
+    flex-basis: 60%;
+    flex-grow: 0;
 }
 
-#today-forecast {
-    margin-left: 15px;
-    padding: 0px 0px 15px 30px;
-    border: 2px solid var(--primary-color);
+.card-body {
     background-color: var(--tertiary-color);
+    border: 1px solid var(--primary-color);
+    padding: 5px;
 }
 #today-forecast h2, #today-forecast div {
     flex-basis: 100%;
