@@ -1,15 +1,35 @@
 // Array to hold city names if one does not already exist in localStorage
 if (localStorage.cityNames) {
     var cityNames = JSON.parse(localStorage.getItem("cityNames"));
-    console.log(localStorage.cityNames);
+    cityNames.forEach(element => {
+        renderPreviousSearch(element);
+    });
 } else {
     var cityNames = [];
 };
 console.log(cityNames);
+
 // API key from account with Open Weather
 const apiKey = "bb7c4152bdea4e092599aeb298e2c4ef";
 
-// Create city search btn
+// Create previous searches element
+const renderPreviousSearch = name => {
+    $("#previous-searches").append(`
+        <button class="btn" type="btn">${name}</button>
+    `);
+};
+
+// See if cityNames already holds searched value
+const cityNameCheck = (name, namesArray) => {
+    console.log(typeof(name));
+    for(let i = 0; i < namesArray.length; i++) {
+        if(namesArray[i] == name) return false;
+    }
+
+    return true;
+}
+
+// Create current forecast element
 const createCurrentForecastEl = (name, temp, feelsLike, windSpeed, humidity) => {
     $("#forecast-container").append(`
     <div class="card-body">
@@ -20,6 +40,10 @@ const createCurrentForecastEl = (name, temp, feelsLike, windSpeed, humidity) => 
         <div>Humidity: ${humidity}%</div>
     </div>
     `);
+    if(cityNameCheck(name, cityNames)) {
+        cityNames.push(name);
+        renderPreviousSearch(name);
+    }
 }
 
 // API fetch to obtain current weather conditions from Open Weather
@@ -28,9 +52,9 @@ const callCurrentForecast = (lat, lon) => {
         .then((response) => {
             if (response.ok) {
                 response.json().then((data) => {
-                    console.log(data);
-                    console.log(data.main);
-                    console.log(data.name);
+                    // console.log(data);
+                    // console.log(data.main);
+                    // console.log(data.name);
                     createCurrentForecastEl(data.name, data.main.temp, data.main.feels_like, data.wind.speed, data.main.humidity);
 
                 });
@@ -62,11 +86,6 @@ const fetchGeocode = (city) => {
 $("#city-btn").click(() => {
     console.log($("#city").val());
     fetchGeocode($("#city").val())
-});
-
-
-$(document).ready(() => {
-    console.log("The document is ready!");
 });
 
 
