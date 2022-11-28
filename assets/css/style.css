@@ -59,6 +59,8 @@ header h1 {
 
 /* Forecast Styling */
 .forecast-container{
+    background-color: var(--tertiary-color);
+    border: 3px solid white;
     flex-basis: 67%;
 }
 
