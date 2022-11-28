@@ -16,15 +16,17 @@
     <header class="d-flex justify-content-center align-items-center">
         <h1>Hogan's Weather Dashboard</h1>
     </header>
-    <main class="d-flex justify-content-around">
-        <section class="search-for-a-city" id="search-container">
-            <label for="city"><h3>Search for a City</h3></label>
-            <input name="city" id="city" type="text" placeholder="Nashville"/>
-            <button class="btn btn-outline-primary city-btn" id="city-btn" type="button">Search</button>
-        </section>
-        <section class="forecast-container" id="forecast-container">
-            <h3>Your Results</h3>
-        </section>
+    <main class="container">
+        <div class="row">
+            <section class="search-for-a-city col-sm-8 col-md-4" id="search-container">
+                <label for="city"><h3>Search for a City</h3></label>
+                <input name="city" id="city" type="text" placeholder="Nashville"/>
+                <button class="btn btn-outline-primary city-btn" id="city-btn" type="button">Search</button>
+            </section>
+            <section class="forecast-container col-sm-8 col-md-8" id="forecast-container">
+                <h3>Your Results</h3>
+            </section>
+        </div>
     </main>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="./assets/js/script.js"></script>
