@@ -17,7 +17,7 @@
         <h1>Hogan's Weather Dashboard</h1>
     </header>
     <main class="container">
-        <div class="row">
+        <div class="row justify-content-center">
             <section class="search-for-a-city col-sm-8 col-md-4" id="search-container">
                 <label for="city"><h3>Search for a City</h3></label>
                 <input name="city" id="city" type="text" placeholder="Nashville"/>
@@ -30,8 +30,10 @@
                 <h3>Previous Searches</h3>
                 <div class="row justify-content-center" id="previous-searches-row"></div>
             </section>
+            <button class="btn col-6" type="button" id="clear-history">Clear Search History</button>
         </div>
     </main>
+    <!-- <footer>Made by <a href="https://www.hogansherrow.com">Hogan</a></footer> -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="./assets/js/script.js"></script>
 </body>

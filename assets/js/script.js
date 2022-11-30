@@ -5,6 +5,19 @@ const renderPreviousSearch = name => {
     `);
 };
 
+// Save to localStorage
+const save = (names) => {
+    localStorage.setItem("cityNames", JSON.stringify(names));
+    console.log(JSON.parse(localStorage.getItem("cityNames")));
+}
+
+// Clear localStorage
+const clearSearchHistory = (arr) => {
+    $("#previous-searches-row").empty();
+    arr.splice(0, arr.length);
+    localStorage.setItem("cityNames", JSON.stringify(arr));
+}
+
 // Array to hold city names if one does not already exist in localStorage
 if (localStorage.cityNames) {
     var cityNames = JSON.parse(localStorage.getItem("cityNames"));
@@ -45,6 +58,7 @@ const createCurrentForecastEl = (name, temp, feelsLike, windSpeed, humidity) => 
     `);
     if(cityNameCheck(name, cityNames)) {
         cityNames.push(name);
+        save(cityNames);
         renderPreviousSearch(name);
     }
 }
@@ -73,7 +87,7 @@ const fetchGeocode = (city) => {
         $("#api-warning").remove();
     }
     if($(".card-body")) $(".card-body").remove();
-    fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${apiKey}`)
+    fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${apiKey}`)
         .then( (response) => {
             if (response.ok) {
                 response.json().then( (data) => {
@@ -94,6 +108,10 @@ $("#city-btn").click(() => {
     // console.log($("#city").val());
     fetchGeocode($("#city").val())
 });
+
+$("#clear-history").click(() => {
+    clearSearchHistory(cityNames);
+})
 
 
 // API fetch to obtain future forecasts. Limits requests to 5 days
