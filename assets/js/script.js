@@ -15,7 +15,9 @@ if (localStorage.cityNames) {
     var cityNames = [];
 };
 
-// console.log(cityNames);
+const checkApiWarning = () => {
+    if($("#api-warning")) alert("warning");
+}
 
 // API key from account with Open Weather
 const apiKey = "bb7c4152bdea4e092599aeb298e2c4ef";
@@ -67,6 +69,10 @@ const callCurrentForecast = (lat, lon) => {
 
 // Fetch for city lat and lon
 const fetchGeocode = (city) => {
+    if($("#api-warning")) {
+        $("#api-warning").remove();
+    }
+    if($(".card-body")) $(".card-body").remove();
     fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${apiKey}`)
         .then( (response) => {
             if (response.ok) {
