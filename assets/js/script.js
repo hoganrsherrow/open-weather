@@ -1,3 +1,10 @@
+// Create previous searches element
+const renderPreviousSearch = name => {
+    $("#previous-searches-row").append(`
+        <button class="btn col-8 col-md-5 col-lg-3" type="btn" onClick="fetchGeocode('${name}')">${name}</button>
+    `);
+};
+
 // Array to hold city names if one does not already exist in localStorage
 if (localStorage.cityNames) {
     var cityNames = JSON.parse(localStorage.getItem("cityNames"));
@@ -7,21 +14,15 @@ if (localStorage.cityNames) {
 } else {
     var cityNames = [];
 };
-console.log(cityNames);
+
+// console.log(cityNames);
 
 // API key from account with Open Weather
 const apiKey = "bb7c4152bdea4e092599aeb298e2c4ef";
 
-// Create previous searches element
-const renderPreviousSearch = name => {
-    $("#previous-searches").append(`
-        <button class="btn" type="btn">${name}</button>
-    `);
-};
-
 // See if cityNames already holds searched value
 const cityNameCheck = (name, namesArray) => {
-    console.log(typeof(name));
+    // console.log(typeof(name));
     for(let i = 0; i < namesArray.length; i++) {
         if(namesArray[i] == name) return false;
     }
@@ -70,13 +71,13 @@ const fetchGeocode = (city) => {
         .then( (response) => {
             if (response.ok) {
                 response.json().then( (data) => {
-                    console.log(data);
-                    console.log(data[0].lat);
-                    console.log(data[0].lon);
+                    // console.log(data);
+                    // console.log(data[0].lat);
+                    // console.log(data[0].lon);
                     callCurrentForecast(data[0].lat, data[0].lon);
                 })
             } else {
-                console.log(response.statusText);
+                // console.log(response.statusText);
                 $(".search-for-a-city").prepend(`<div id="api-warning">Please enter a valid city name.</div>`);
             }
         })
@@ -84,7 +85,7 @@ const fetchGeocode = (city) => {
 
 
 $("#city-btn").click(() => {
-    console.log($("#city").val());
+    // console.log($("#city").val());
     fetchGeocode($("#city").val())
 });
 
